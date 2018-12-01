@@ -1,0 +1,23 @@
+# Config file for automatic testing at travis-ci.org
+
+sudo: required
+language: minimal
+services:
+  - docker
+
+#add encrypted token for utils repo
+travis env set CI_USER_TOKEN the-generated-token --private -r myorg/main
+
+# Command to install dependencies, e.g. pip install -r requirements.txt --use-mirrors
+install: docker-compose build
+
+jobs:
+  include:
+    - stage: test
+      # Command to run tests, e.g. python setup.py test
+      script: 
+      - if [ True ];
+        then docker-compose run app pytest;
+        else docker-compose run app python setup.py test;
+        fi
+
