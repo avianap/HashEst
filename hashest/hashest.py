@@ -21,6 +21,13 @@ class jaccard_maker:
         df.set_index('vocab', inplace = True)
         return(df)
 
+    def direct_jaccard(co_mat):
+        """ Calculates a jaccard matrix of size m x m from a word occurence matrix of size m x n
+        Args: 
+            co_mat (pd.DataFrame): co-occurence matrix of size m x n
+        Returns:
+            pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
+        """
 
 
 

@@ -15,7 +15,7 @@ Example sentences:
 
 Example word occurence dataframe:
 
-| word          |*1*   |*2*  |*3*  |
+| vocab         |*1*   |*2*  |*3*  |
 | ------------- |:----:| ---:| ---:|
 | who           | 1    | 1   | 1   |
 | was           | 1    | 1   | 1   |
@@ -30,39 +30,50 @@ Example word occurence dataframe:
 | egypt         | 0    | 0   | 1   |
 
 ```python
-import pandas as pd
-
-class jaccard_maker(string_dict)
+class jaccard_maker:
     def __init__(self, string_dict):
-        string_dict = self.string_dict
+        self.string_dict = string_dict
 
-    def sentence_dict_to_matrix(string_dict):
-      """ Calculates co-occurance matrix for dictionary of strings
-      Args:
-        string_dict (dict): dict with keys mapped to values that are strings of words
-      Returns:
-        pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
-      """
-
+    def string_dict_to_occur_df(self):
+        """ Calculates a word occurance dataframe from a dictionary of strings
+        Args:
+            string_dict (dict): dict with keys mapped to values that are strings of words
+        Returns:
+            pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
+        """
+        tokenized_dict = #tokenizes string values in the input dictionary
+        vocab = #creates object of length n containing all the unique words from all the strings
+        occur_dict = #creates a new dictionary with values of length n denoting the occurences of words each string 
+        ...
+        return(df)
 ```
 
-#### Problem 2
-##### Directly Calculate Jaccard Similarity
+Hints:
+    -   Dictionary comprehensions may be helpful
+    -   [itertools.chain()](https://docs.python.org/2/library/itertools.html#itertools.chain)
+    -   [pandas.DataFrame.from_dict](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_dict.html)
 
-Implement a function that calculates a Jaccard matrix directly
+
+#### Problem 2
+#### Directly Calculate Jaccard Similarity
+
+Implement a class method that calculates a Jaccard matrix directly from a word occurence matrix
 <br>
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/eaef5aa86949f49e7dc6b9c8c3dd8b233332c9e7)
 
 
 ```python
+class jaccard_maker:
+    def __init__(self, string_dict):
+        self.string_dict = string_dict
 
-def direct_jaccard(co_mat):
-  """ Calculates a jaccard matrix of size m x m from a co-occurence matrix of size m x n
-  Args: 
-    co_mat (pd.DataFrame): co-occurence matrix of size m x n
-  Returns:
-    pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
-  """
+    def direct_jaccard(co_mat):
+        """ Calculates a jaccard matrix of size m x m from a word occurence matrix of size m x n
+        Args: 
+            co_mat (pd.DataFrame): co-occurence matrix of size m x n
+        Returns:
+            pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
+        """
  ```
   
 Hints:
