@@ -7,7 +7,8 @@ Estimate Jaccard Similarities Using Min Hashing
 Implement a function that takes in sentences and outputs a co-occurence matrix
 
 Input:
-```{A: "Who was the first king of Poland?",
+```python
+    {A: "Who was the first king of Poland?",
     B: "Who was the first ruler of Poland?"
     C: "Who was the last pharaoh of Egypt?"
     }
@@ -87,7 +88,7 @@ Implement function to estimate jaccard similarity. The function should randomly 
 
 Signature Matrix
 
-|permutation| A | B | C |
+|permutation|*A*|*B*|*C*|
 | ------ | - | - | - |
 | perm 1 | 1 | 1 | 1 |
 | perm 2 | 1 | 1 | 1 |
