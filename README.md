@@ -49,9 +49,9 @@ class jaccard_maker:
 ```
 
 Hints:
-    -   Dictionary comprehensions may be helpful
-    -   [itertools.chain()](https://docs.python.org/2/library/itertools.html#itertools.chain)
-    -   [pandas.DataFrame.from_dict](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_dict.html)
+-Dictionary comprehensions may be helpful
+-[itertools.chain()](https://docs.python.org/2/library/itertools.html#itertools.chain)
+-[pandas.DataFrame.from_dict](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_dict.html)
 
 
 #### Problem 2
@@ -77,8 +77,8 @@ class jaccard_maker:
  ```
   
 Hints:
-itertools.combinations() 
-sklearn.metrics.jaccard_similarity_score()
+-itertools.combinations() 
+-sklearn.metrics.jaccard_similarity_score()
 
 
 #### Problem 3

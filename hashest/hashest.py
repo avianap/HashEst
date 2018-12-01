@@ -1,5 +1,6 @@
 import itertools
 import pandas as pd
+from sklearn.metrics import jaccard_similarity_score
 from hashest import get_words
 
 class jaccard_maker:
@@ -21,14 +22,18 @@ class jaccard_maker:
         df.set_index('vocab', inplace = True)
         return(df)
 
-    def direct_jaccard(co_mat):
+    def direct_jaccard(self, occur_df):
         """ Calculates a jaccard matrix of size m x m from a word occurence matrix of size m x n
         Args: 
             co_mat (pd.DataFrame): co-occurence matrix of size m x n
         Returns:
             pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
         """
+        for x in itertools.combinations_with_replacement(range(0,occur_df.shape[1]),2):
+            print(x)
+        combos = [(occur_df.iloc[:,x[0]].values, occur_df.iloc[:,x[1]].values)  for x in itertools.combinations_with_replacement(range(0, occur_df.shape[1]),2)]
 
+        import pdb; pdb.set_trace()
 
 
 
