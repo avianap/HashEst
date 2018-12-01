@@ -7,13 +7,15 @@ Estimate Jaccard Similarities Using Min Hashing
 Implement a function that takes in sentences and outputs a co-occurence matrix
 
 Input:
-  A. Who was the first king of Poland?
-  B. Who was the first ruler of Poland?
-  C. Who was the last pharaoh of egypt?
+```{A: "Who was the first king of Poland?",
+    B: "Who was the first ruler of Poland?"
+    C: "Who was the last pharaoh of Egypt?"
+    }
+```
 
 Output:
 
-| word          | A    | B   | C   |
+|word           |*A*   |*B*  |*C*  |
 | ------------- |:----:| ---:| ---:|
 | who           | 1    | 1   | 1   |
 | was           | 1    | 1   | 1   |
@@ -69,7 +71,7 @@ sklearn.metrics.jaccard_similarity_score()
 
 Implement function to estimate jaccard similarity. The function should randomly permute an inputted co-occurrence matrix, save the “min” match value for each permutation for each column to a new matrix-- the signature matrix. The jaccard similarity of columns in the signature matrix will provide a close estimate of the jaccard similarity between columns of the co-occurrence matrix.
 
-| permutation 1 | permutation 2 | permutation 3 | permutation 4 | word          | A    | B   | C   |
+| perm 1        | perm 2        | perm 3        | perm 4        | word          | *A*  | *B* | *C* |
 |---------------|---------------|---------------|---------------| ------------- |:----:| ---:| ---:|
 | 1             | 9             | 3             | 9             | who           | 1    | 1   | 1   |
 | 2             | 4             | 5             | 11            | was           | 1    | 1   | 1   |
@@ -85,12 +87,12 @@ Implement function to estimate jaccard similarity. The function should randomly 
 
 Signature Matrix
 
-| permutation   | A | B | C |
-| ------------- | - | - | - |
-| permutation 1 | 1 | 1 | 1 |
-| permutation 2 | 1 | 1 | 1 |
-| permutation 3 | 2 | 2 | 1 |
-| permutation 4 | 1 | 2 | 3 |
+|permutation| A | B | C |
+| ------ | - | - | - |
+| perm 1 | 1 | 1 | 1 |
+| perm 2 | 1 | 1 | 1 |
+| perm 3 | 2 | 2 | 1 |
+| perm 4 | 1 | 2 | 3 |
 
 ```python
 def permute_jaccard(co_mat, permutations = 100):
