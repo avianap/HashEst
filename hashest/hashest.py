@@ -6,8 +6,8 @@ class jaccard_maker:
     def __init__(self, string_dict):
         self.string_dict = string_dict
 
-    def string_dict_to_matrix(self):
-        """ Calculates co-occurance matrix for dictionary of strings
+    def string_dict_to_occur_df(self):
+        """ Calculates a word occurance dataframe from a dictionary of strings
         Args:
             string_dict (dict): dict with keys mapped to values that are strings of words
         Returns:

@@ -4,20 +4,16 @@ Estimate Jaccard Similarities Using Min Hashing
 In this problem set everything you create should be inside your python package folder 'HashEst'. 
 
 ### Problem 1 
-### Create a co-occurrence matrix
+### Create a word occurrence dataframe
 
-Implement a function that takes in sentences and outputs a co-occurence matrix
+Implement a function that takes in a dictionary of sentences and outputs a pandas dataframe containing word occurances
 
-Input:
-```python
-{
-1: "Who was the first king of Poland?",
-2: "Who was the first ruler of Poland?",
-3: "Who was the last pharaoh of Egypt?"
-}
-```
+Example sentences: 
+1. "Who was the first king of Poland?",
+2. "Who was the first ruler of Poland?",
+3. "Who was the last pharaoh of Egypt?"
 
-Output:
+Example word occurence dataframe:
 
 | word          |*1*   |*2*  |*3*  |
 | ------------- |:----:| ---:| ---:|
