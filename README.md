@@ -8,15 +8,16 @@ Implement a function that takes in sentences and outputs a co-occurence matrix
 
 Input:
 ```python
-    {A: "Who was the first king of Poland?",
-    B: "Who was the first ruler of Poland?"
-    C: "Who was the last pharaoh of Egypt?"
-    }
+{
+A: "Who was the first king of Poland?",
+B: "Who was the first ruler of Poland?",
+C: "Who was the last pharaoh of Egypt?"
+}
 ```
 
 Output:
 
-|word           |*A*   |*B*  |*C*  |
+| word          |*A*   |*B*  |*C*  |
 | ------------- |:----:| ---:| ---:|
 | who           | 1    | 1   | 1   |
 | was           | 1    | 1   | 1   |
@@ -41,13 +42,13 @@ def sentence_dict_to_matrix(string_dict):
     pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
   """
 
-
 ```
 
 #### Problem 2
 ##### Directly Calculate Jaccard Similarity
 
 Implement a function that calculates a Jaccard matrix directly
+<br>
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/eaef5aa86949f49e7dc6b9c8c3dd8b233332c9e7)
 
 
