@@ -1,23 +1,25 @@
 # HashEst
 Estimate Jaccard Similarities Using Min Hashing
 
-#### Problem 1 
-##### Create a co-occurrence matrix
+In this problem set everything you create should be inside your python package folder 'HashEst'. 
+
+### Problem 1 
+### Create a co-occurrence matrix
 
 Implement a function that takes in sentences and outputs a co-occurence matrix
 
 Input:
 ```python
 {
-A: "Who was the first king of Poland?",
-B: "Who was the first ruler of Poland?",
-C: "Who was the last pharaoh of Egypt?"
+1: "Who was the first king of Poland?",
+2: "Who was the first ruler of Poland?",
+3: "Who was the last pharaoh of Egypt?"
 }
 ```
 
 Output:
 
-| word          |*A*   |*B*  |*C*  |
+| word          |*1*   |*2*  |*3*  |
 | ------------- |:----:| ---:| ---:|
 | who           | 1    | 1   | 1   |
 | was           | 1    | 1   | 1   |
@@ -34,13 +36,17 @@ Output:
 ```python
 import pandas as pd
 
-def sentence_dict_to_matrix(string_dict):
-  """ Calculates co-occurance matrix for dictionary of strings
-  Args:
-    string_dict (dict): dict with keys mapped to values that are strings of words
-  Returns:
-    pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
-  """
+class jaccard_maker(string_dict)
+    def __init__(self, string_dict):
+        string_dict = self.string_dict
+
+    def sentence_dict_to_matrix(string_dict):
+      """ Calculates co-occurance matrix for dictionary of strings
+      Args:
+        string_dict (dict): dict with keys mapped to values that are strings of words
+      Returns:
+        pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
+      """
 
 ```
 

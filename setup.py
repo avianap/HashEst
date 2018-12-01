@@ -11,7 +11,7 @@ with open('README.rst') as readme_file:
 with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
-requirements = ['setuptools_scm']
+requirements = ['setuptools_scm', 'pandas']
 
 setup_requirements = ['pytest-runner','setuptools_scm']
 
