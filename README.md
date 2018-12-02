@@ -64,25 +64,27 @@ Implement a class method that calculates a Jaccard matrix directly from a word o
 
 ```python
 class jaccard_maker:
-    def __init__(self, string_dict):
-        self.string_dict = string_dict
-
-    def direct_jaccard(co_mat):
+    ...
+    def direct_jaccard(self, occur_df):
         """ Calculates a jaccard matrix of size m x m from a word occurence matrix of size m x n
         Args: 
             co_mat (pd.DataFrame): co-occurence matrix of size m x n
         Returns:
             pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
         """
+        jac_df = #initialize a dataframe of zeros m x m
+        #iterate though combos and calculate pairwise jaccard similarities 
+        ...
+        return(jac_df)
  ```
   
 Hints:
--itertools.combinations() 
--sklearn.metrics.jaccard_similarity_score()
+-[itertools.product()](https://docs.python.org/2/library/itertools.html#itertools.product) 
+-[sklearn.metrics.jaccard_similarity_score()](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_similarity_score.html)
 
 
 #### Problem 3
-##### Use min row number and multiple permutations to estimate Jaccard Similarity
+#### Use min row number and multiple permutations to estimate Jaccard Similarity
 
 Implement function to estimate jaccard similarity. The function should randomly permute an inputted co-occurrence matrix, save the “min” match value for each permutation for each column to a new matrix-- the signature matrix. The jaccard similarity of columns in the signature matrix will provide a close estimate of the jaccard similarity between columns of the co-occurrence matrix.
 

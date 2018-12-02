@@ -1,5 +1,6 @@
 import itertools
 import pandas as pd
+import numpy as np
 from sklearn.metrics import jaccard_similarity_score
 from hashest import get_words
 
@@ -29,11 +30,10 @@ class jaccard_maker:
         Returns:
             pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
         """
-        for x in itertools.combinations_with_replacement(range(0,occur_df.shape[1]),2):
-            print(x)
-        combos = [(occur_df.iloc[:,x[0]].values, occur_df.iloc[:,x[1]].values)  for x in itertools.combinations_with_replacement(range(0, occur_df.shape[1]),2)]
-
-        import pdb; pdb.set_trace()
+        jac_df = pd.DataFrame(np.zeros((occur_df.shape[1], occur_df.shape[1])))
+        for x in itertools.product(range(0,occur_df.shape[1]), range(0,occur_df.shape[1])):
+            jac_df.iat[x[0],x[1]] = jaccard_similarity_score(occur_df.iloc[:,x[0]].values, occur_df.iloc[:,x[1]].values)
+        return(jac_df)
 
 
 
