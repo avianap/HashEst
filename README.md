@@ -49,9 +49,9 @@ class jaccard_maker:
 ```
 
 Hints:
--Dictionary comprehensions may be helpful
--[itertools.chain()](https://docs.python.org/2/library/itertools.html#itertools.chain)
--[pandas.DataFrame.from_dict](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_dict.html)
+* Dictionary comprehensions may be helpful
+* [itertools.chain()](https://docs.python.org/2/library/itertools.html#itertools.chain)
+* [pandas.DataFrame.from_dict](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_dict.html)
 
 
 #### Problem 2
@@ -73,14 +73,14 @@ class jaccard_maker:
             pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
         """
         jac_df = #initialize a dataframe of zeros m x m
-        #iterate though combos and calculate pairwise jaccard similarities 
+        #iterate though combos of columns and calculate pairwise jaccard similarities 
         ...
         return(jac_df)
  ```
   
 Hints:
--[itertools.product()](https://docs.python.org/2/library/itertools.html#itertools.product) 
--[sklearn.metrics.jaccard_similarity_score()](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_similarity_score.html)
+* [itertools.product()](https://docs.python.org/2/library/itertools.html#itertools.product) 
+* [sklearn.metrics.jaccard_similarity_score()](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.jaccard_similarity_score.html)
 
 
 #### Problem 3
