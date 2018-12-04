@@ -4,54 +4,74 @@ Estimate Jaccard Similarities Using Min Hashing
 In this problem set everything you create should be inside your python package folder 'HashEst'. 
 
 ### Problem 1 
-### Create a word occurrence dataframe
+### Create a word occurrence nested dictionary
 
-Implement a function that takes in a dictionary of sentences and outputs a pandas dataframe containing word occurances
+Implement a function that takes in a dictionary of sentences and outputs a nested dictionary containing word occurances
 
-Example sentences: 
-1. "Who was the first king of Poland?",
-2. "Who was the first ruler of Poland?",
-3. "Who was the last pharaoh of Egypt?"
+Input: 
+```python
+{
+0: "Who was the first king of Poland?", 
+1: "Who was the first ruler of Poland?",
+2: "Who was the last pharaoh of Egypt?"}
+```
 
-Example word occurence dataframe:
+Word Occurence Visualization:
 
-| vocab         |*1*   |*2*  |*3*  |
-| ------------- |:----:| ---:| ---:|
-| who           | 1    | 1   | 1   |
-| was           | 1    | 1   | 1   |
-| the           | 1    | 1   | 1   |
-| first         | 1    | 1   | 0   |
-| king          | 1    | 0   | 0   |
-| of            | 1    | 1   | 1   |
-| poland        | 1    | 1   | 0   |
-| last          | 0    | 0   | 1   |
-| ruler         | 0    | 1   | 0   |
-| pharaoh       | 0    | 0   | 1   |
-| egypt         | 0    | 0   | 1   |
+coded representation| vocab         |*0*   |*1*  |*2*  |
+|-------------------| ------------- |:----:| ---:| ---:|
+|1                  | who           | 1    | 1   | 1   |
+|2                  | was           | 1    | 1   | 1   |
+|3                  | the           | 1    | 1   | 1   |
+|4                  | first         | 1    | 1   | 0   |
+|5                  | king          | 1    | 0   | 0   |
+|6                  | of            | 1    | 1   | 1   |
+|7                  | poland        | 1    | 1   | 0   |
+|8                  | last          | 0    | 0   | 1   |
+|9                  | ruler         | 0    | 1   | 0   |
+|10                 | pharaoh       | 0    | 0   | 1   |
+|11                 | egypt         | 0    | 0   | 1   |
+
+Output:
+```python
+{
+0: {1: 1, 2: 1, 3: 1, 4: 1, 5: 1, 6: 1, 7: 1, 8: 0, 9: 0, 10: 0, 11: 0}, 
+1: {1: 1, 2: 1, 3: 1, 4: 1, 5: 0, 6: 1, 7: 1, 8: 0, 9: 1, 10: 0, 11: 0}, 
+2: {1: 1, 2: 1, 3: 1, 4: 0, 5: 0, 6: 1, 7: 0, 8: 1, 9: 0, 10: 1, 11: 1}
+}
+```
 
 ```python
 class jaccard_maker:
     def __init__(self, string_dict):
         self.string_dict = string_dict
 
-    def string_dict_to_occur_df(self):
+    def string_dict_to_occur_dict(self):
         """ Calculates a word occurance dataframe from a dictionary of strings
         Args:
-            string_dict (dict): dict with keys mapped to values that are strings of words
+            string_dict (dict): dict with keys (representing column numbers starting from 0) mapped to values (strings)
         Returns:
-            pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
+            dictionary: nested dictionary with outer keys (representing column numbers starting from 0) and inner dictionary key representing each unique word in the vocabulary and values representing a binary for whether that word occurs in the sentence
+
+        Example:
+            string_dict = {0: "The cat is grey", 1: "The dog is brown"}
+            vocab_dict = {"the":1, "cat":2, "is":3, "grey":4, "dog":5, "brown":6}
+            
+            occur_dict = {0: {1:1, 2:1, 3:1, 4:1, 5:0, 6:0}, 1: {1:1, 2:0, 3:1, 4:0, 5:1, 6:1}}
+            
         """
-        tokenized_dict = #tokenizes string values in the input dictionary
-        vocab = #creates object of length n containing all the unique words from all the strings
-        occur_dict = #creates a new dictionary with values of length n denoting the occurences of words each string 
-        ...
-        return(df)
+        tokenized_dict = #break sentences down into lists of words
+        vocab = #find unique words in the vocab
+        vocab_dict = #map words to integers
+        coded_dict = #map lists of words to corresponding integers
+        occur_dict = #create dictionary of coded word occurences
+        return(occur_dict)
+
 ```
 
 Hints:
-* Dictionary comprehensions may be helpful
+* Dictionary comprehensions will be helpful
 * [itertools.chain()](https://docs.python.org/2/library/itertools.html#itertools.chain)
-* [pandas.DataFrame.from_dict](https://pandas.pydata.org/pandas-docs/stable/generated/pandas.DataFrame.from_dict.html)
 
 
 #### Problem 2
