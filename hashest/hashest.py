@@ -12,9 +12,16 @@ class jaccard_maker:
     def string_dict_to_occur_dict(self):
         """ Calculates a word occurance dataframe from a dictionary of strings
         Args:
-            string_dict (dict): dict with keys (counting from 0 to len-1) mapped to values that are strings of words
+            string_dict (dict): dict with keys (representing column numbers starting from 0) mapped to values (strings)
         Returns:
-            --EDIT pandas.DataFrame with columns corresponding to the dictionary key of each element in the string_dict and rows for each unique word in the string_dict’s values
+            dictionary: nested dictionary with outer keys (representing column numbers starting from 0) and inner dictionary key representing each unique word in the vocabulary and values representing a binary for whether that word occurs in the sentence
+
+        Example:
+            string_dict = {0: "The cat is grey", 1: "The dog is brown"}
+            vocab_dict = {"the":1, "cat":2, "is":3, "grey":4, "dog":5, "brown":6}
+            
+            occur_dict = {0: {1:1, 2:1, 3:1, 4:1, 5:0, 6:0}, 1: {1:1, 2:0, 3:1, 4:0, 5:1, 6:1}}
+            
         """
         tokenized_dict = {k:get_words.tokenize(v) for (k,v) in self.string_dict.items()}
         vocab = tuple(set(itertools.chain.from_iterable(tokenized_dict.values())))
@@ -26,21 +33,21 @@ class jaccard_maker:
     def direct_jaccard(self, occur_dict):
         """ Calculates a jaccard matrix of size m x m from a word occurence dictionary of size m x n
         Args: 
-            occur_dict (dictionary): nested dictionary of length m with dictionaries as values containing keys = words and values = occurence boolean
+            occur_dict (dictionary): nested dictionary of length m with dictionaries as values containing keys = words in vocab and values = occurence boolean
         Returns:
             pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
         """
         jac_df = pd.DataFrame(np.zeros((len(occur_dict), len(occur_dict)))) 
         for x in itertools.product(occur_dict.keys(), occur_dict.keys()): 
-            coded_occur = [k*v for k,v in occur_dict[x[0]].items()] 
-            coded_occur_mask = np.ma.masked_equal(np.array(coded_occur),0)
-            import pdb; pdb.set_trace()
-            jac_df.iat[x[0],x[1]] = jaccard_similarity_score(np.ma.masked_equal(np.array([k*v for k,v in occur_dict[x[0]].items()]),0), np.ma.masked_equal(np.array([k*v for k,v in occur_dict[x[1]].items()]),0))
-            #mask is not working, drop zeros instead
+            coded_arrays = {0:np.array([k*v for k,v in occur_dict[x[0]].items()]), 1:np.array([k*v for k,v in occur_dict[x[1]].items()])}
+            coded_arrays_nonzero = {k:v[np.nonzero(v)] for k,v in coded_arrays.items()}
+            intersection = len(np.intersect1d(coded_arrays_nonzero[0], coded_arrays_nonzero[1]))
+            union = len(coded_arrays_nonzero[0]) + len(coded_arrays_nonzero[1]) - intersection
+            jac_df.iat[x[0],x[1]] = intersection/union
         return(jac_df)
 
     def permute_jaccard(self, occur_dict, permutations):
-        """ Calculates a jaccard matrix of size m x m from a word occurence nested dictionary of size m x n using min row numbers from multiple row order permutations
+        """ Calculates a jaccard matrix of size m x m from a word occurence nested dictionary using min row numbers from multiple row order permutations
         Args:
             occur_dict (dictionary): word occurence nested dictionary 
             permutations (int): number of times to permute row numbers
@@ -58,11 +65,5 @@ class jaccard_maker:
         for x in itertools.product(perm_dict.keys(),perm_dict.keys()):
             co_occur = (perm_dict[x[0]]==perm_dict[x[1]]).astype(int)
             jac_df.iat[x[0],x[1]] = sum(co_occur)/len(co_occur)
-        #sim_df = pd.DataFrame() #empty square df of size m x m
-        #for i,j in min_vals_df: #same logic from question 2
-        #    jaccard_score = jaccard_similarity_score(df[i],df[j])
-        #    sim_df.loc[[i,j]] = jaccard_score
-        #    sim_df.loc[[j,i]] = jaccard_score
-
-
+        return(jac_df)
 
