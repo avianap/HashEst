@@ -2,6 +2,7 @@ import itertools
 import pandas as pd
 import numpy as np
 import random
+import hashlib
 from sklearn.metrics import jaccard_similarity_score
 from hashest import get_words
 
@@ -66,4 +67,24 @@ class jaccard_maker:
             co_occur = (perm_dict[x[0]]==perm_dict[x[1]]).astype(int)
             jac_df.iat[x[0],x[1]] = sum(co_occur)/len(co_occur)
         return(jac_df)
+
+    def hash_jaccard(self, string_dict, hashes):
+        """Calculates a jaccard matrix of size m x m from a word occurence nested dictionary using min hash values from multiple hashes
+        Args:
+            occur_dict (dictionary): word occurence nested dictionary
+        Returns: 
+            pandas.DataFrame of size m x m containing jaccard similarities between each row and column combination
+        """
+        tokenized_dict = {k:get_words.tokenize(v) for (k,v) in self.string_dict.items()}
+        hashes_dict = {k:np.array([]) for k in tokenized_dict.keys()}
+        for i in range(0,hashes):
+            salt = random.randint(1,10000)
+            min_hash_dict = {k: min([hashlib.md5((x+str(salt)).encode()).hexdigest() for x in v]) for k,v in tokenized_dict.items()}
+            hashes_dict = {k:np.append(v,min_hash_dict[k]) for k,v in hashes_dict.items()}
+        jac_df = pd.DataFrame(np.zeros((len(hashes_dict),len(hashes_dict))))
+        for x in itertools.product(hashes_dict.keys(),hashes_dict.keys()):
+            co_occur = (hashes_dict[x[0]]==hashes_dict[x[1]]).astype(int)
+            jac_df.iat[x[0],x[1]] = sum(co_occur)/len(co_occur)
+        return(jac_df)
+
 
