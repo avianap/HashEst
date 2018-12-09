@@ -1,34 +1,41 @@
 import time
+import random
 from hashest import hashest
 from hashest import get_words
 
-string_dict = {0: "Who was the first king of Poland?", 1: "Who was the first ruler of Poland?", 2: "Who was the last pharaoh of Egypt?"}
-print(string_dict)
+#with open('doc_1.txt') as f:
+#    doc_1 = f.read()
+#with open('doc_2.txt') as f:
+#    doc_2 = f.read()
+
+x = random.sample(range(20000), 10000)
+y = random.sample(range(40000), 30000)
+
+doc_1 = ' '.join(str(e) for e in x)
+doc_2 = ' '.join(str(e) for e in y)
+
+
+#doc_1 = "1 2 3 4 5 6"
+#doc_2 = "1 2 3 4 5 7"
+
+j = hashest.jaccard_maker(doc_1, doc_2)
 
 start = time.time()
-j = hashest.jaccard_maker(string_dict)
-occur_dict = j.string_dict_to_occur_dict()
+jac_sim = j.direct_jaccard()
 end = time.time()
-print(occur_dict)
+print("direct jaccard = {}".format(jac_sim))
 print(end-start)
 
 
 start = time.time()
-jac_df = j.direct_jaccard(occur_dict)
+jac_est_df = j.permute_jaccard(permutations = 100)
 end = time.time()
-print(jac_df)
+print("row perm jaccard = {}".format(jac_est_df))
 print(end-start)
 
 
 start = time.time()
-jac_est_df = j.permute_jaccard(occur_dict, permutations = 10000)
+jac_hash_est_df = j.hash_jaccard(hashes = 100)
 end = time.time()
-print(jac_est_df)
-print(end-start)
-
-
-start = time.time()
-jac_hash_est_df = j.hash_jaccard(string_dict, hashes = 10000)
-end = time.time()
-print(jac_hash_est_df)
+print("hash jaccard = {}".format(jac_hash_est_df))
 print(end-start)
