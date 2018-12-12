@@ -54,6 +54,7 @@ class jaccard_maker:
 ```
 
 
+
 #### Problem 2
 ##### Directly Calculate Jaccard Similarity
 
@@ -73,6 +74,7 @@ Implement a function that calculates a Jaccard matrix directly
         ...
 
  ```
+  
   
 
 #### Problem 3
@@ -118,6 +120,6 @@ output = sum(co-occur)/len(co-occur)
   ```
 
 Hints
--Use salt to create different hashes
--`functools.partial()` 
+* Use salt to create different hashes
+* `functools.partial()` 
 
