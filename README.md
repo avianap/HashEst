@@ -79,12 +79,13 @@ class jaccard_maker:
         
 
 
-#### Problem 2
-#### Directly Calculate Jaccard Similarity
+### Problem 2
+### Directly Calculate Jaccard Similarity
 
 Implement a class method that calculates a Jaccard matrix directly from a word occurence matrix
 
 <br>
+
 ![](https://wikimedia.org/api/rest_v1/media/math/render/svg/eaef5aa86949f49e7dc6b9c8c3dd8b233332c9e7)
 
 
@@ -101,8 +102,8 @@ Implement a class method that calculates a Jaccard matrix directly from a word o
   
   
 
-#### Problem 3
-##### Use Minhashing to Estimate Jaccard Similarity
+### Problem 3
+### Use Minhashing to Estimate Jaccard Similarity
 
 Implement a function that compares the minimum hashes of each document and tracks the results in a co-occurence array. The co-occurence array can be used to estimate the jaccard similarity.
 
