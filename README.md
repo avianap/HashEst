@@ -1,6 +1,31 @@
 # HashEst
 Estimate Jaccard Similarities Using Min Hashing
 
+#### Setup
+
+* Create a main.py file for running your hashest/hashest.py module
+* Reuse the tokenize words function you created for your previous pset
+
+```python
+import random
+from hashest import hashest
+from hashest import get_words
+
+x = random.sample(range(50000), 40000)
+y = random.sample(range(90000), 40000)
+
+doc_1 = ' '.join(str(e) for e in x)
+doc_2 = ' '.join(str(e) for e in y)
+
+j = hashest.jaccard_maker(doc_1, doc_2)
+
+jac_sim = j.direct_jaccard()
+print("direct jaccard = {}".format(jac_sim))
+
+jac_hash_est_df = j.hash_jaccard(hashes = 200)
+print("hash jaccard = {}".format(jac_hash_est_df))
+```
+
 #### Problem 1 
 ##### Create a co-occurrence matrix
 
