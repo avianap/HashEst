@@ -1,7 +1,6 @@
 # HashEst
 Estimate Jaccard Similarities Using Min Hashing
 
-<<<<<<< HEAD
 #### Setup
 
 * Create a main.py file for running your hashest/hashest.py module
