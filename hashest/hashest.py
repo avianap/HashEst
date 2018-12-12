@@ -15,7 +15,7 @@ class jaccard_maker:
         """ Calculates a word occurance dataframe from two strings
 
         Returns:
-            dictionary: nested dictionary with outer keys (representing column numbers starting from 0) and inner dictionary key representing each unique word in the vocabulary and values representing a binary for whether that word occurs in the sentence
+            dictionary: nested dictionary with outer keys (representing each document) mapped to dictionaries with keys representing each unique word in the vocabulary and values representing a binary for whether that word occurs in the sentence
 
         Example:
             string_dict = {0: "The cat is grey", 1: "The dog is brown"}
@@ -26,7 +26,6 @@ class jaccard_maker:
         """
         tokenized_dict = {k:get_words.tokenize(v) for (k,v) in self.string_dict.items()}
         vocab = tuple(set(itertools.chain.from_iterable(tokenized_dict.values())))
-        print('length of vocab is {}'.format(len(vocab)))
         vocab_dict = {v:x+1 for x, v in zip(range(len(vocab)),vocab)}
         coded_dict = {k: [vocab_dict[x] for x in v] for k,v in tokenized_dict.items()}
         occur_dict = {k: {i:int(i in v) for i in vocab_dict.values()} for k,v in coded_dict.items()}
@@ -45,25 +44,6 @@ class jaccard_maker:
         union = len(coded_arrays_nonzero[0]) + len(coded_arrays_nonzero[1]) - intersection
         return(intersection/union)
 
-    def permute_jaccard(self, permutations):
-        """ Calculates the jaccard similarity between doc_1 and doc_2 using min row numbers from multiple row order permutations
-
-        Args:
-            permutations (int): number of times to permute row numbers
-        Returns:
-            float: jaccard similarity estimate between doc_1 and doc_2
-        """
-        occur_dict = self.string_dict_to_occur_dict()
-        row_num = [x+1 for x in range(len(occur_dict[1]))]
-        perm_dict = {k:np.array([]) for k in occur_dict.keys()}
-        for i in range(0,permutations):
-            random.shuffle(row_num)
-            row_num_dict = {k:np.array(list(itertools.chain(occur_dict[k].values())))*row_num for k,v in occur_dict.items()}
-            min_row_num_dict = {k:np.ma.min(np.ma.masked_equal(v,0)) for k,v in row_num_dict.items()}
-            perm_dict = {k:np.append(v,min_row_num_dict[k]) for k,v in perm_dict.items()}
-        co_occur = perm_dict[0]==perm_dict[1]
-        return(sum(co_occur)/len(co_occur))
-
     def hash_jaccard(self, hashes):
         """ Calculates the jaccard similarity between doc_1 and doc_2 using min hash values from multiple hashes
 
@@ -73,7 +53,6 @@ class jaccard_maker:
             float: jaccard similarity estimate between doc_1 and doc_2
         """
         tokenized_dict = {k:get_words.tokenize(v) for (k,v) in self.string_dict.items()}
-        hash_dict = {k:np.array([]) for k in tokenized_dict.keys()}
 
         def hash_item(word, salt):
             return(int(hashlib.md5((word+str(salt)).encode()).hexdigest(),16))
@@ -85,7 +64,7 @@ class jaccard_maker:
                     min_hash_val = hash_val
             return(min_hash_val)
 
-        co_occur =  np.array([get_min_hash(map(functools.partial(hash_item, salt = i), tokenized_dict[0])) for i in range(0,hashes)]) == np.array([get_min_hash(map(functools.partial(hash_item, salt = i), tokenized_dict[1])) for i in range(0,hashes)]) 
+        co_occur = [get_min_hash(map(functools.partial(hash_item, salt = i), tokenized_dict[0])) == get_min_hash(map(functools.partial(hash_item, salt = i), tokenized_dict[1])) for i in range(hashes)]
 
         return(sum(co_occur)/len(co_occur))
 
