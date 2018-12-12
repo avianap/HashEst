@@ -76,7 +76,9 @@ class jaccard_maker:
 
         """
 ```
-        
+
+#### Hints
+* `itertools.chain.from_iterable`
 
 
 ### Problem 2
@@ -99,7 +101,9 @@ Implement a class method that calculates a Jaccard matrix directly from a word o
         ...
 
  ```
-  
+ 
+ #### Hints
+ * `np.intersect1d`
   
 
 ### Problem 3
