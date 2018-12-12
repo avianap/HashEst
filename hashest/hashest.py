@@ -4,7 +4,6 @@ import functools
 import numpy as np
 import random
 import hashlib
-from sklearn.metrics import jaccard_similarity_score
 from hashest import get_words
 
 class jaccard_maker:
