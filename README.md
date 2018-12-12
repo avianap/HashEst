@@ -1,5 +1,5 @@
 # HashEst
-Estimate Jaccard Similarities Using Min Hashing
+#### Estimate Jaccard Similarities Using Min Hashing
 
 #### Setup
 
@@ -31,18 +31,18 @@ print("hash jaccard = {}".format(jac_hash_est_df))
 
 Implement a function that takes in a dictionary of sentences and outputs a nested dictionary containing word occurances
 
-Input: 
+#### Input: 
 ```python
 doc_1 = "Who was the first king of Poland?"
 doc_2 = "Who was the first ruler of Poland?"
 ```
 
-Output:
+#### Output:
 
 ```python
 {0 : {1:1, 2;1, 3:1, 4:1, 5:1, 6:1, 7:1, 8:0}, 1 : {1:1, 2;1, 3:1, 4:1, 5:1, 6:1, 7:0, 8:1} }
 ```
-Representing: 
+#### Representing: 
 
 |row number| vocab         |*0*   |*1*  |
 |----------| ------------- |:----:| ---:| 
@@ -107,7 +107,7 @@ Implement a class method that calculates a Jaccard matrix directly from a word o
 
 Implement a function that compares the minimum hashes of each document and tracks the results in a co-occurence array. The co-occurence array can be used to estimate the jaccard similarity.
 
-1. Take multiple hashes of the words in the document
+#### 1. Take multiple hashes of the words in the document
 ```python
 min([hash1("who"), hash1("was"), hash1("the"), hash1("first"), hash1("king"), hash1("of"), hash1("poland")]) 
 ==
@@ -116,12 +116,12 @@ min([hash1("who"), hash1("was"), hash1("the"), hash1("first"), hash1("ruler"), h
 min([hash2("who")... 
 ```
 
-2. Calculate a co-occurence array
+#### 2. Calculate a co-occurence array
 ```python
 co-occur = [1,1,0,0...
 ```
 
-3. Use the co-occurence array to calculate a jaccard estimate:
+#### 3. Use the co-occurence array to calculate a jaccard estimate:
 ```python
 output = sum(co-occur)/len(co-occur)
 ```
@@ -141,7 +141,7 @@ output = sum(co-occur)/len(co-occur)
         return(sum(co_occur)/len(co_occur))
   ```
 
-Hints
+#### Hints
 * Use salt to create different hashes
 * `functools.partial()` 
 
